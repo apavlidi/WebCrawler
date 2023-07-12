@@ -14,7 +14,7 @@ public class ValidationService {
     ArrayList<String> errorMessages = new ArrayList<>();
 
     if(isNotValidUrl(url)){
-      errorMessages.add("The url provided is invalid");
+      errorMessages.add(String.format("The url:%s provided is invalid",url));
     }
 
     return errorMessages;

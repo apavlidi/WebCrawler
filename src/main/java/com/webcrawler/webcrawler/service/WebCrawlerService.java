@@ -1,8 +1,6 @@
 package com.webcrawler.webcrawler.service;
 
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
-import java.net.URL;
+import com.webcrawler.webcrawler.web.UrlResponse;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
@@ -14,80 +12,65 @@ import org.springframework.stereotype.Service;
 @Service
 public class WebCrawlerService {
 
-private final Queue<String> urlQueue;
-private final List<String> visitedURLs;
+  private Queue<String> urlQueue;
+  private List<String> visitedURLs;
 
-private final ComplianceService complianceService;
+  private final ComplianceService complianceService;
+  private final HtmlReaderService htmlReader;
 
-private final List<String> validUrls;
+  public WebCrawlerService(ComplianceService complianceService, HtmlReaderService htmlReader) {
+    this.complianceService = complianceService;
+    this.htmlReader = htmlReader;
+  }
 
-public WebCrawlerService(ComplianceService complianceService) {
-	this.complianceService = complianceService;
-	urlQueue = new LinkedList<>();
-	visitedURLs = new ArrayList<>();
-	validUrls = new ArrayList<>();
-}
+  public List<UrlResponse> crawl(String rootURL, int limit) {
+    initializeCrawl(rootURL);
 
-public List<String> crawl(String rootURL, int limit) {
-	List<String> disallowedPages = complianceService.retrieveDisallowedPages(rootURL);
-	String domainName = getDomainName(rootURL);
+    List<UrlResponse> urlsResponse = new ArrayList<>();
+    List<String> disallowedPages = complianceService.retrieveDisallowedPages(rootURL);
+    Pattern pattern = retrieveDomainUrlPattern(rootURL);
 
-	urlQueue.add(rootURL);
-	visitedURLs.add(rootURL);
+    while (!urlQueue.isEmpty() && limit > 0) {
+      String currentUrl = urlQueue.remove();
+      String rawHTML = htmlReader.getRawHTML(currentUrl);
+      List<String> links = extractLinks(pattern.matcher(rawHTML), disallowedPages);
+      urlsResponse.add(new UrlResponse(currentUrl, links));
+      limit--;
+    }
 
-	while (!urlQueue.isEmpty()) {
+    return urlsResponse;
+  }
 
-	String s = urlQueue.remove();
-	String rawHTML = "";
-	try {
-		URL url = new URL(s);
-		BufferedReader in = new BufferedReader(new InputStreamReader(url.openStream()));
-		String inputLine = in.readLine();
+  private Pattern retrieveDomainUrlPattern(String rootURL) {
+    String domainName = getDomainName(rootURL);
+    String urlPattern = "((?:https?|http)://(?:www\\.)?" + Pattern.quote(domainName) + "[^\\s\"]*)";
+    return Pattern.compile(urlPattern);
+  }
 
-		while (inputLine != null) {
-		rawHTML += inputLine;
+  private void initializeCrawl(String rootURL) {
+    urlQueue = new LinkedList<>();
+    visitedURLs = new ArrayList<>();
+    urlQueue.add(rootURL);
+    visitedURLs.add(rootURL);
+  }
 
-		inputLine = in.readLine();
-		}
-		in.close();
-	} catch (Exception e) {
-		e.printStackTrace();
-	}
+  private List<String> extractLinks(Matcher matcher, List<String> disallowedPages) {
+    List<String> links = new ArrayList<>();
 
-	String urlPattern =
-		"((?:https?|http)://(?:www\\.)?" + Pattern.quote(domainName) + "[^\\s\"]*)";
-	Pattern pattern = Pattern.compile(urlPattern);
-	Matcher matcher = pattern.matcher(rawHTML);
+    while (matcher.find()) {
+      String actualURL = matcher.group();
+      if (!visitedURLs.contains(actualURL) && !disallowedPages.contains(actualURL)) {
+        visitedURLs.add(actualURL);
+        urlQueue.add(actualURL);
+        links.add(actualURL);
+      }
+    }
 
-	limit = getUrl(limit, matcher, disallowedPages);
+    return links;
+  }
 
-	if (limit == 0) {
-		break;
-	}
-	}
+  private String getDomainName(String rootURL) {
+    return rootURL.replaceAll("http(s)?://|www\\.|/.*", "");
+  }
 
-	return validUrls;
-}
-
-private static String getDomainName(String rootURL) {
-	return rootURL.replaceAll("http(s)?://|www\\.|/.*", "");
-}
-
-private int getUrl(int limit, Matcher urlMatcher, List<String> disallowedPages) {
-	while (urlMatcher.find()) {
-	String actualURL = urlMatcher.group();
-
-	if (!visitedURLs.contains(actualURL) && !disallowedPages.contains(actualURL)) {
-		visitedURLs.add(actualURL);
-		validUrls.add(actualURL);
-		urlQueue.add(actualURL);
-	}
-
-	if (limit == 0) {
-		break;
-	}
-	limit--;
-	}
-	return limit;
-}
 }

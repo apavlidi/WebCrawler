@@ -2,6 +2,7 @@ package com.webcrawler.webcrawler.controllers;
 
 import com.webcrawler.webcrawler.service.ValidationService;
 import com.webcrawler.webcrawler.service.WebCrawlerService;
+import com.webcrawler.webcrawler.web.UrlResponse;
 import java.util.List;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -15,7 +16,7 @@ public class WebCrawlerController {
   private final WebCrawlerService crawlerService;
   private final ValidationService validationService;
 
-  private final String DEFAULT_URL_LIMIT_CRAWL = "500";
+  private final String DEFAULT_URL_LIMIT_CRAWL = "10";
 
   public WebCrawlerController(WebCrawlerService crawlerService,
       ValidationService validationService) {
@@ -24,7 +25,7 @@ public class WebCrawlerController {
   }
 
   @GetMapping(value = "/crawl")
-  public ResponseEntity<List<String>> crawlUrl(@RequestParam String url,
+  public ResponseEntity crawlUrl(@RequestParam String url,
       @RequestParam(required = false, defaultValue = DEFAULT_URL_LIMIT_CRAWL) Integer limit) {
     List<String> errorMessages = validationService.validate(url);
 
