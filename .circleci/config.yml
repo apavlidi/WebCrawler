@@ -28,7 +28,7 @@ jobs:
       - run: mvn jacoco:report
 
       - codecov/upload:
-          file: ./target/site/jacoco/jacoco.xml
+          file: ~/app/target/site/jacoco/jacoco.xml
 
       - run: mvn package
 
