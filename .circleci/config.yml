@@ -45,7 +45,7 @@ jobs:
 
       - run:
           name: Deploying
-          command: eb deploy Web-crawler-env --debug
+          command: eb deploy Web-crawl-env --debug
 
 
 workflows:
