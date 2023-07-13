@@ -44,6 +44,7 @@ You can format the code by using the spotless plugin `$ mvn spotless:apply`. Spo
 
 ### Documentation 📕
 Web-Crawl documentation is available [here](https://github.com/codurance/Retropolis-BE/wiki).
+The API is also exposed via [OpenAPI](https://www.openapis.org/) and it's accessible here: [/v3/api-docs](http://web-crawl-env.eba-upp2ihyt.eu-west-2.elasticbeanstalk.com/v3/api-docs)
 
 ### Project Kanban 👨‍🏫
 Web-Crawl project kanban is available [here](https://github.com/users/apavlidi/projects/1).
