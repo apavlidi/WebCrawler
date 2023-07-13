@@ -1,8 +1,8 @@
 branch-defaults:
   master:
-    environment: Web-crawler-env
+    environment: Web-crawl-env
 deploy:
-  artifact: target/web-crawl-0.0.1-SNAPSHOT.jar
+  artifact: target/web-crawler-0.0.1-SNAPSHOT.jar
 global:
   application_name: web-crawl
   default_ec2_keyname: null
