@@ -10,7 +10,7 @@ jobs:
     steps:
       - checkout
 
-      - vm-install-tools/install-java11
+      - vm-install-tools/install-java17
 
       - run: mvn test
 
@@ -23,7 +23,7 @@ jobs:
     steps:
       - checkout
 
-      - vm-install-tools/install-java17
+      - run: sudo apt install openjdk-17-jre
 
       - run: mvn jacoco:report
 
