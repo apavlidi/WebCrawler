@@ -26,17 +26,17 @@ You can also run the application using docker:
 
 2) `$ docker run -p 8080:8080 app`
 
-#### Run tests
+#### Run tests ✅
 You can run the tests by using `$ mvn test`.
 
-#### Generate coverage report
+#### Generate coverage report 📊
 You can produce code coverage report using the jacoco plugin `$ mvn jacoco:report`.
 
-#### Lint code
-You can format the code by using the spotless plugin `$ mvn spotless:apply`. Spotless has been configured to use [google style code](https://google.github.io/styleguide/javaguide.html)
+#### Lint code 💅
+You can format the code by using the spotless plugin `$ mvn spotless:apply`. Spotless has been configured to use [google style code](https://google.github.io/styleguide/javaguide.html).
 
-### Documentation
-Web-Crawl documentation is available [here](https://github.com/codurance/Retropolis-BE/wiki)
+### Documentation 📕
+Web-Crawl documentation is available [here](https://github.com/codurance/Retropolis-BE/wiki).
 
-### Project Kanban
-Web-Crawl project kanban is available [here](https://github.com/users/apavlidi/projects/1)
+### Project Kanban 👨‍🏫
+Web-Crawl project kanban is available [here](https://github.com/users/apavlidi/projects/1).
