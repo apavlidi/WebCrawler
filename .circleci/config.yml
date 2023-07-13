@@ -25,12 +25,12 @@ jobs:
 
       - run: sudo apt install openjdk-17-jre
 
+      - run: mvn package
+
       - run: mvn jacoco:report
 
       - codecov/upload:
-          file: ~/app/target/site/jacoco/jacoco.xml
-
-      - run: mvn package
+          file: ./target/site/jacoco/jacoco.xml
 
       - run:
           name: Installing deployment dependencies
