@@ -7,7 +7,7 @@ This is a java web crawler which crawls a URL and returns the URLs visited with 
 The project is build with [Spring](https://spring.io/) and Java 17. It uses [JUnit](https://junit.org/junit5/).
 The project follows the [Google Java Style Guide](https://google.github.io/styleguide/javaguide.html) by utilising the [spotless plugin](https://github.com/diffplug/spotless) which is configured with [google style guide](https://google.github.io/styleguide/javaguide.html). It also provides a code coverage report by using [jacoco](https://github.com/jacoco/jacoco). 
 
-For CI/CD it uses [CircleCI](https://app.circleci.com/), for deployment [AWS Elastic Beanstalk](https://aws.amazon.com/elasticloadbalancing/) and the application is wrapped with [Docker](https://www.docker.com/)
+For CI/CD it uses [CircleCI](https://app.circleci.com/), for deployment [AWS Elastic Beanstalk](https://aws.amazon.com/elasticloadbalancing/) and the application is wrapped with [Docker](https://www.docker.com/).
 
 The CI/CD includes the following steps:
 1. Check codestyle
@@ -43,8 +43,8 @@ The code coverage report has been deployed to [Codecov](https://app.codecov.io/)
 You can format the code by using the spotless plugin `$ mvn spotless:apply`. Spotless has been configured to use [google style code](https://google.github.io/styleguide/javaguide.html).
 
 ### Documentation 📕
-Web-Crawl documentation is available [here](https://github.com/codurance/Retropolis-BE/wiki).
-The API is also exposed via [OpenAPI](https://www.openapis.org/) and it's accessible here: [/v3/api-docs](http://web-crawl-env.eba-upp2ihyt.eu-west-2.elasticbeanstalk.com/v3/api-docs)
+Web-Crawl documentation is available [here](https://github.com/apavlidi/WebCrawler/wiki).
+The API is also exposed via [OpenAPI](https://www.openapis.org/), and it's accessible here: [/v3/api-docs](http://web-crawl-env.eba-upp2ihyt.eu-west-2.elasticbeanstalk.com/v3/api-docs)
 
 ### Project Kanban 👨‍🏫
 Web-Crawl project kanban is available [here](https://github.com/users/apavlidi/projects/1).
