@@ -12,7 +12,7 @@ jobs:
 
       - vm-install-tools/install-java17
 
-      - run: spotless:check
+      - run: mvn spotless:check
 
       - run: mvn test
 
