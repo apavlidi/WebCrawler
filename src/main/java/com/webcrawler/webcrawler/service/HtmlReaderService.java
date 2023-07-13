@@ -7,10 +7,10 @@ import java.net.URL;
 import org.springframework.stereotype.Service;
 
 @Service
-public class HtmlReaderService {
+public class HtmlReaderService implements ResourceReaderService {
 
 
-public String getRawHTML(String url) {
+public String readResource(String url) {
 	StringBuilder rawHTML = new StringBuilder();
 
 	try (BufferedReader in = new BufferedReader(new InputStreamReader(new URL(url).openStream()))) {

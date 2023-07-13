@@ -1,8 +1,7 @@
-package com.webcrawler.webcrawler.controllers;
+package com.webcrawler.webcrawler.controller;
 
 import com.webcrawler.webcrawler.service.ValidationService;
 import com.webcrawler.webcrawler.service.WebCrawlerService;
-import com.webcrawler.webcrawler.web.UrlResponse;
 import java.util.List;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -27,7 +26,7 @@ public WebCrawlerController(WebCrawlerService crawlerService,
 @GetMapping(value = "/crawl")
 public ResponseEntity crawlUrl(@RequestParam String url,
 	@RequestParam(required = false, defaultValue = DEFAULT_URL_LIMIT_CRAWL) Integer limit) {
-	List<String> errorMessages = validationService.validate(url);
+	List<String> errorMessages = validationService.validate(url,limit);
 
 	if (!errorMessages.isEmpty()) {
 	return new ResponseEntity<>(errorMessages, HttpStatus.BAD_REQUEST);

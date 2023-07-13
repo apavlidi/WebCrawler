@@ -16,11 +16,11 @@ private Queue<String> urlQueue;
 private List<String> visitedURLs;
 
 private final ComplianceService complianceService;
-private final HtmlReaderService htmlReader;
+private final ResourceReaderService resourceReader;
 
-public WebCrawlerService(ComplianceService complianceService, HtmlReaderService htmlReader) {
+public WebCrawlerService(ComplianceService complianceService, ResourceReaderService resourceReader) {
 	this.complianceService = complianceService;
-	this.htmlReader = htmlReader;
+	this.resourceReader = resourceReader;
 }
 
 public List<UrlResponse> crawl(String rootURL, int limit) {
@@ -32,7 +32,7 @@ public List<UrlResponse> crawl(String rootURL, int limit) {
 
 	while (!urlQueue.isEmpty() && limit > 0) {
 	String currentUrl = urlQueue.remove();
-	String rawHTML = htmlReader.getRawHTML(currentUrl);
+	String rawHTML = resourceReader.readResource(currentUrl);
 	List<String> links = extractLinks(pattern.matcher(rawHTML), disallowedPages);
 	urlsResponse.add(new UrlResponse(currentUrl, links));
 	limit--;
