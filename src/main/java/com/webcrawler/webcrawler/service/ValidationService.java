@@ -10,22 +10,22 @@ import org.springframework.stereotype.Service;
 public class ValidationService {
 
 
-  public List<String> validate(String url) {
-    ArrayList<String> errorMessages = new ArrayList<>();
+public List<String> validate(String url) {
+	ArrayList<String> errorMessages = new ArrayList<>();
 
-    if(isNotValidUrl(url)){
-      errorMessages.add(String.format("The url:%s provided is invalid",url));
-    }
+	if(isNotValidUrl(url)){
+	errorMessages.add(String.format("The url:%s provided is invalid",url));
+	}
 
-    return errorMessages;
-  }
+	return errorMessages;
+}
 
 
-  public static boolean isNotValidUrl(String url) {
-    String regex = "^(https)://([\\w.-]+)(:\\d+)?(/\\S*)?$";
-    Pattern pattern = Pattern.compile(regex);
-    Matcher matcher = pattern.matcher(url);
-    return !matcher.matches();
-  }
+public static boolean isNotValidUrl(String url) {
+	String regex = "^(https)://([\\w.-]+)(:\\d+)?(/\\S*)?$";
+	Pattern pattern = Pattern.compile(regex);
+	Matcher matcher = pattern.matcher(url);
+	return !matcher.matches();
+}
 
 }
