@@ -1,4 +1,4 @@
-# Web-Crawler
+# Web-Crawler [![CircleCI](https://dl.circleci.com/status-badge/img/gh/apavlidi/WebCrawler/tree/main.svg?style=svg)](https://dl.circleci.com/status-badge/redirect/gh/apavlidi/WebCrawler/tree/main) [![codecov](https://codecov.io/gh/apavlidi/WebCrawler/branch/main/graph/badge.svg?token=T7ACUBVJDX)](https://codecov.io/gh/apavlidi/WebCrawler)
 
 This is a java web crawler which crawls a URL and returns the URLs visited with all the links on that URL found. You can find here the released version of this application: [web-crawler-monzo.onrender.com/](web-crawler-monzo.onrender.com/)
 
