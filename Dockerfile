@@ -3,17 +3,9 @@ FROM maven:3-openjdk-17 AS maven
 
 WORKDIR /usr/src/app
 COPY . /usr/src/app
-
-ENV CODACY_PROJECT_TOKEN=5dd723057df7435281bb69772bad8542
-
 # Compile and package the application to an executable JAR
-RUN curl -o get.sh -Ls https://coverage.codacy.com/get.sh && \
-    chmod +x get.sh && \
-    ./get.sh
-
 
 RUN mvn package
-
 
 
 # For Java 11,

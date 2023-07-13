@@ -1,0 +1,11 @@
+branch-defaults:
+  master:
+    environment: Web-crawler-env
+deploy:
+  artifact: target/web-crawler-0.0.1-SNAPSHOT.jar
+global:
+  application_name: web-crawler
+  default_ec2_keyname: null
+  default_platform: Corretto 17 running on 64bit Amazon Linux 2/3.4.9
+  default_region: eu-west-2
+  sc: git

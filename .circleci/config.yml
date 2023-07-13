@@ -1,0 +1,58 @@
+version: 2.1
+orbs:
+  codecov: codecov/codecov@1.0.2
+  vm-install-tools: entur/vm-install-tools@0.0.6
+
+jobs:
+  test:
+    machine: true
+    working_directory: ~/app
+    steps:
+      - checkout
+
+      - vm-install-tools/install-java11
+
+      - run: mvn test
+
+      - run: mvn package
+
+  deploy:
+    working_directory: ~/app
+    machine:
+      image: ubuntu-1604:201903-01
+    steps:
+      - checkout
+
+      - vm-install-tools/install-java17
+
+      - run: mvn jacoco:report
+
+      - codecov/upload:
+          file: ./target/site/jacoco/jacoco.xml
+
+      - run: mvn package
+
+      - run:
+          name: Installing deployment dependencies
+          working_directory: /
+          command: |
+            sudo apt-get -y -qq update
+            sudo apt-get install python3-pip python-dev build-essential
+            sudo pip3 install --upgrade setuptools
+            sudo pip3 install awsebcli --upgrade
+
+      - run:
+          name: Deploying
+          command: eb deploy Web-crawler-env --debug
+
+
+workflows:
+  version: 2
+  build:
+    jobs:
+      - test
+      - deploy:
+          filters:
+            branches:
+              only:
+                - master
