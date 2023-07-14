@@ -38,7 +38,7 @@ class WebCrawlerServiceTest {
   }
 
   @Test
-  void crawl_shouldReturnUrlResponseList() {
+  void should_crawl_rootUrl() {
     int limit = 10;
     List<String> disallowedPages = new ArrayList<>();
     disallowedPages.add("http://example.com/disallowed");
@@ -62,7 +62,7 @@ class WebCrawlerServiceTest {
     verifyNoMoreInteractions(resourceReader);
   }
   @Test
-  void crawl_shouldLimitNumberOfUrls() {
+  void should_crawl_limited_number_of_pages() {
     int limit = 2;
 
     List<UrlResponse> result = webCrawlerService.crawl(ROOT_URL, limit);
@@ -76,7 +76,7 @@ class WebCrawlerServiceTest {
   }
 
   @Test
-  void crawl_shouldExcludeDisallowedPages() {
+  void should_not_crawl_disallowed_pages() {
     // Arrange
     String rootURL = "http://example.com";
     int limit = 10;

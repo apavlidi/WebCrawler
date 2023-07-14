@@ -21,7 +21,7 @@ public class ValidationServiceTest {
     validationService = new ValidationService();
   }
   @Test
-  public void shouldValidateWithValidUrlAndPositiveLimit_NoErrorMessages() {
+  public void should_return_no_errors_when_valid_url_and_limit() {
     List<String> errorMessages = validationService.validate(VALID_URL, VALID_LIMIT);
     assertTrue(errorMessages.isEmpty());
   }

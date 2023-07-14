@@ -1,4 +1,4 @@
-package com.webcrawler.webcrawler.controller;
+package com.webcrawler.webcrawler;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class HealthController {
 
 @GetMapping(value = "/health")
-public ResponseEntity getHealthStatus(){
+public ResponseEntity<String> getHealthStatus(){
 	return new ResponseEntity<>("The service is healthy", HttpStatus.OK);
 }
 

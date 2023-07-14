@@ -1,4 +1,4 @@
-package com.webcrawler.webcrawler.controller;
+package com.webcrawler.webcrawler;
 
 import com.webcrawler.webcrawler.service.ValidationService;
 import com.webcrawler.webcrawler.service.WebCrawlerService;
