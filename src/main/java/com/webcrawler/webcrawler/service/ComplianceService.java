@@ -30,7 +30,7 @@ public class ComplianceService {
     for (int i = 1; i < disallowedEntries.length; i++) {
       disallowedPages.add(disallowedEntries[i].trim());
     }
-    return disallowedPages;
+    return disallowedPages  ;
   }
 
 
