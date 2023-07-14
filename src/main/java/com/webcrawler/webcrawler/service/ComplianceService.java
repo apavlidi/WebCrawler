@@ -4,49 +4,41 @@ import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import org.springframework.stereotype.Service;
 
 @Service
 public class ComplianceService {
-private final List<String> disallowedUrls;
 
-public ComplianceService() {
-	this.disallowedUrls = new ArrayList<>();
-}
+  private final ResourceReaderService resourceReaderService;
+
+  public ComplianceService(ResourceReaderService resourceReaderService) {
+    this.resourceReaderService = resourceReaderService;
+  }
 
 
-public List<String> retrieveDisallowedPages(String domainName) {
-	try {
-	domainName = removeTrailingSlashIfExists(domainName);
+  public List<String> retrieveDisallowedPages(String domainName) {
+    String robotsContent = resourceReaderService.readResource(
+        removeTrailingSlashIfExists(domainName) + "/robots.txt");
 
-	URL url = new URL(domainName + "/robots.txt");
-	BufferedReader in = new BufferedReader(new InputStreamReader(url.openStream()));
-	String inputLine = in.readLine();
+    String[] disallowedEntries = robotsContent.split("Disallow:");
 
-	while (inputLine != null) {
-		if (inputLine.contains("Disallow:")) {
-		String[] disallowedUrl = inputLine.split(" ");
+    List<String> disallowedPages = new ArrayList<>();
+    for (int i = 1; i < disallowedEntries.length; i++) {
+      disallowedPages.add(disallowedEntries[i].trim());
+    }
+    return disallowedPages;
+  }
 
-		disallowedUrls.add(domainName + disallowedUrl[1]);
-		}
 
-		inputLine = in.readLine();
-	}
-	in.close();
-	} catch (Exception e) {
-	e.printStackTrace();
-	}
-
-	return disallowedUrls;
-}
-
-private String removeTrailingSlashIfExists(String domainName) {
-	if (domainName.endsWith("/")) {
-	domainName = domainName.substring(0, domainName.length() - 1);
-	}
-	return domainName;
-}
-
+  private String removeTrailingSlashIfExists(String domainName) {
+    if (domainName.endsWith("/")) {
+      domainName = domainName.substring(0, domainName.length() - 1);
+    }
+    return domainName;
+  }
 
 }
