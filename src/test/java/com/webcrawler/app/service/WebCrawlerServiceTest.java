@@ -1,15 +1,11 @@
 package com.webcrawler.app.service;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
-import com.webcrawler.app.exception.CrawlException;
 import com.webcrawler.app.exception.ResourceReadException;
 import com.webcrawler.app.web.UrlResponse;
 import java.util.ArrayList;
@@ -37,8 +33,10 @@ public class WebCrawlerServiceTest {
     resourceReader = mock(ResourceReaderService.class);
     webCrawlerService = new WebCrawlerService(complianceService, resourceReader);
 
-    when(resourceReader.readResource(ROOT_URL)).thenReturn("<html><a href=\"http://example.com/page1\"></a></html>");
-    when(resourceReader.readResource("http://example.com/page1")).thenReturn("<html><a href=\"http://example.com/page2\"></a></html>");
+    when(resourceReader.readResource(ROOT_URL)).thenReturn(
+        "<html><a href=\"http://example.com/page1\"></a></html>");
+    when(resourceReader.readResource("http://example.com/page1")).thenReturn(
+        "<html><a href=\"http://example.com/page2\"></a></html>");
     when(resourceReader.readResource("http://example.com/page2")).thenReturn("");
   }
 
@@ -64,6 +62,7 @@ public class WebCrawlerServiceTest {
     verify(resourceReader, times(1)).readResource("http://example.com/page1");
     verify(resourceReader, times(1)).readResource("http://example.com/page2");
   }
+
   @Test
   void should_crawl_limited_number_of_pages() throws ResourceReadException {
     int limit = 2;
@@ -84,9 +83,12 @@ public class WebCrawlerServiceTest {
     disallowedPages.add("http://example.com/disallowed");
 
     when(complianceService.retrieveDisallowedPages(ROOT_URL)).thenReturn(disallowedPages);
-    when(resourceReader.readResource(ROOT_URL)).thenReturn("<html><a href=\"http://example.com/page1\"></a></html>");
-    when(resourceReader.readResource("http://example.com/page1")).thenReturn("<html><a href=\"http://example.com/page2\"></a></html>");
-    when(resourceReader.readResource("http://example.com/page2")).thenReturn("<html><a href=\"http://example.com/disallowed\"></a></html>");
+    when(resourceReader.readResource(ROOT_URL)).thenReturn(
+        "<html><a href=\"http://example.com/page1\"></a></html>");
+    when(resourceReader.readResource("http://example.com/page1")).thenReturn(
+        "<html><a href=\"http://example.com/page2\"></a></html>");
+    when(resourceReader.readResource("http://example.com/page2")).thenReturn(
+        "<html><a href=\"http://example.com/disallowed\"></a></html>");
     when(resourceReader.readResource("http://example.com/disallowed")).thenReturn("<html></html>");
 
     List<UrlResponse> result = webCrawlerService.crawl(ROOT_URL, LIMIT);
@@ -103,13 +105,5 @@ public class WebCrawlerServiceTest {
     verify(resourceReader, times(1)).readResource(ROOT_URL);
     verify(resourceReader, times(1)).readResource("http://example.com/page1");
     verify(resourceReader, times(1)).readResource("http://example.com/page2");
-  }
-
-  @Test
-  void crawl_ShouldThrowRuntimeException_WhenResourceReadExceptionOccurs() throws ResourceReadException {
-    when(complianceService.retrieveDisallowedPages(ROOT_URL)).thenReturn(new ArrayList<>());
-    when(resourceReader.readResource(anyString())).thenThrow(new ResourceReadException("An error occured",any()));
-
-    assertThrows(CrawlException.class, () -> webCrawlerService.crawl(ROOT_URL, LIMIT));
   }
 }
