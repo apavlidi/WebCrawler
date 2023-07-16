@@ -2,6 +2,7 @@ package com.webcrawler.webcrawler.service;
 
 import com.webcrawler.webcrawler.service.ComplianceService;
 import com.webcrawler.webcrawler.service.ResourceReaderService;
+import java.util.Collections;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -95,6 +96,15 @@ public class ComplianceServiceTest {
     List<String> disallowedPages = complianceService.retrieveDisallowedPages(DOMAIN_NAME);
 
     assertEquals(0, disallowedPages.size());
+  }
+
+  @Test
+  public void should_return_empty_list_if_reading_resource_throws_an_exception() throws ResourceReadException {
+    when(resourceReaderService.readResource(anyString())).thenThrow(new ResourceReadException("An error occurred",any()));
+
+    List<String> disallowedPages = complianceService.retrieveDisallowedPages(DOMAIN_NAME);
+
+    assertEquals(Collections.emptyList(), disallowedPages);
   }
 
 }
