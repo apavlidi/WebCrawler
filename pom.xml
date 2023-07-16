@@ -25,6 +25,8 @@
       <version>3.0.2</version>
     </dependency>
 
+
+    <!--   OPEN API-->
     <dependency>
       <groupId>org.springdoc</groupId>
       <artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
@@ -43,10 +45,16 @@
       <version>1.15.0</version>
     </dependency>
 
+    <!-- AWS X-RAY -->
     <dependency>
       <groupId>com.amazonaws</groupId>
       <artifactId>aws-xray-recorder-sdk-spring</artifactId>
       <version>2.11.0</version>
+    </dependency>
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-aop</artifactId>
+      <version>2.5.2</version>
     </dependency>
     <dependency>
       <groupId>com.amazonaws</groupId>
@@ -54,9 +62,10 @@
       <version>2.10.0</version>
     </dependency>
     <dependency>
-      <groupId>org.springframework.boot</groupId>
-      <artifactId>spring-boot-starter-aop</artifactId>
-      <version>2.5.2</version>
+      <groupId>javax.servlet</groupId>
+      <artifactId>javax.servlet-api</artifactId>
+      <version>4.0.1</version>
+      <scope>provided</scope>
     </dependency>
 
   </dependencies>
