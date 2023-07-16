@@ -1,6 +1,5 @@
 package com.webcrawler.webcrawler.web;
 
-import com.amazonaws.xray.spring.aop.XRayEnabled;
 import com.webcrawler.webcrawler.service.ValidationService;
 import com.webcrawler.webcrawler.service.WebCrawlerService;
 import java.util.List;
@@ -13,7 +12,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@XRayEnabled
 public class WebCrawlerController {
 
 private final WebCrawlerService crawlerService;

@@ -2,13 +2,11 @@ package com.webcrawler.webcrawler.service;
 
 import static java.util.Collections.emptyList;
 
-import com.amazonaws.xray.spring.aop.XRayEnabled;
 import java.util.ArrayList;
 import java.util.List;
 import org.springframework.stereotype.Service;
 
 @Service
-@XRayEnabled
 public class ComplianceService {
 
   private final ResourceReaderService resourceReaderService;

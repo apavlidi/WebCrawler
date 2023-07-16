@@ -1,6 +1,5 @@
 package com.webcrawler.webcrawler.service;
 
-import com.amazonaws.xray.spring.aop.XRayEnabled;
 import com.webcrawler.webcrawler.web.UrlResponse;
 import java.util.ArrayList;
 import java.util.LinkedList;
@@ -11,7 +10,6 @@ import java.util.regex.Pattern;
 import org.springframework.stereotype.Service;
 
 @Service
-@XRayEnabled
 public class WebCrawlerService {
 
   private Queue<String> urlQueue;
