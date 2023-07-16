@@ -1,13 +1,9 @@
 package com.webcrawler.webcrawler.service;
 
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
-import java.net.URL;
+import static java.util.Collections.emptyList;
+
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -21,16 +17,20 @@ public class ComplianceService {
 
 
   public List<String> retrieveDisallowedPages(String domainName) {
-    String robotsContent = resourceReaderService.readResource(
-        removeTrailingSlashIfExists(domainName) + "/robots.txt");
-
-    String[] disallowedEntries = robotsContent.split("Disallow:");
-
     List<String> disallowedPages = new ArrayList<>();
-    for (int i = 1; i < disallowedEntries.length; i++) {
-      disallowedPages.add(disallowedEntries[i].trim());
+    try {
+      String robotsContent = resourceReaderService.readResource(
+          removeTrailingSlashIfExists(domainName) + "/robots.txt");
+
+      String[] disallowedEntries = robotsContent.split("Disallow:");
+
+      for (int i = 1; i < disallowedEntries.length; i++) {
+        disallowedPages.add(disallowedEntries[i].trim());
+      }
+    } catch (ResourceReadException e) {
+      return emptyList();
     }
-    return disallowedPages  ;
+    return disallowedPages;
   }
 
 

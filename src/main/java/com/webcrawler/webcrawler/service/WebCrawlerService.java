@@ -12,65 +12,71 @@ import org.springframework.stereotype.Service;
 @Service
 public class WebCrawlerService {
 
-private Queue<String> urlQueue;
-private List<String> visitedURLs;
+  private Queue<String> urlQueue;
+  private List<String> visitedURLs;
 
-private final ComplianceService complianceService;
-private final ResourceReaderService resourceReader;
+  private final ComplianceService complianceService;
+  private final ResourceReaderService resourceReader;
 
-public WebCrawlerService(ComplianceService complianceService, ResourceReaderService resourceReader) {
-	this.complianceService = complianceService;
-	this.resourceReader = resourceReader;
-}
+  public WebCrawlerService(ComplianceService complianceService,
+      ResourceReaderService resourceReader) {
+    this.complianceService = complianceService;
+    this.resourceReader = resourceReader;
+  }
 
-public List<UrlResponse> crawl(String rootURL, int limit) {
-	initializeCrawl(rootURL);
+  public List<UrlResponse> crawl(String rootURL, int limit) {
+    initializeCrawl(rootURL);
 
-	List<UrlResponse> urlsResponse = new ArrayList<>();
-	List<String> disallowedPages = complianceService.retrieveDisallowedPages(rootURL);
-	Pattern pattern = retrieveDomainUrlPattern(rootURL);
+    List<UrlResponse> urlsResponse = new ArrayList<>();
+    List<String> disallowedPages = complianceService.retrieveDisallowedPages(rootURL);
+    Pattern pattern = retrieveDomainUrlPattern(rootURL);
+    try {
 
-	while (!urlQueue.isEmpty() && limit > 0) {
-	String currentUrl = urlQueue.remove();
-	String rawHTML = resourceReader.readResource(currentUrl);
-	List<String> links = extractLinks(pattern.matcher(rawHTML), disallowedPages);
-	urlsResponse.add(new UrlResponse(currentUrl, links));
-	limit--;
-	}
+      while (!urlQueue.isEmpty() && limit > 0) {
+        String currentUrl = urlQueue.remove();
+        String rawHTML = resourceReader.readResource(currentUrl);
 
-	return urlsResponse;
-}
+        List<String> links = extractLinks(pattern.matcher(rawHTML), disallowedPages);
+        urlsResponse.add(new UrlResponse(currentUrl, links));
+        limit--;
+      }
 
-private Pattern retrieveDomainUrlPattern(String rootURL) {
-	String domainName = getDomainName(rootURL);
-	String urlPattern = "((?:https?|http)://(?:www\\.)?" + Pattern.quote(domainName) + "[^\\s\"]*)";
-	return Pattern.compile(urlPattern);
-}
+    } catch (ResourceReadException e) {
+      throw new RuntimeException("Failed parsing url");
+    }
+    return urlsResponse;
+  }
 
-private void initializeCrawl(String rootURL) {
-	urlQueue = new LinkedList<>();
-	visitedURLs = new ArrayList<>();
-	urlQueue.add(rootURL);
-	visitedURLs.add(rootURL);
-}
+  private Pattern retrieveDomainUrlPattern(String rootURL) {
+    String domainName = getDomainName(rootURL);
+    String urlPattern = "((?:https?|http)://(?:www\\.)?" + Pattern.quote(domainName) + "[^\\s\"]*)";
+    return Pattern.compile(urlPattern);
+  }
 
-private List<String> extractLinks(Matcher matcher, List<String> disallowedPages) {
-	List<String> links = new ArrayList<>();
+  private void initializeCrawl(String rootURL) {
+    urlQueue = new LinkedList<>();
+    visitedURLs = new ArrayList<>();
+    urlQueue.add(rootURL);
+    visitedURLs.add(rootURL);
+  }
 
-	while (matcher.find()) {
-	String actualURL = matcher.group();
-	if (!visitedURLs.contains(actualURL) && !disallowedPages.contains(actualURL)) {
-		visitedURLs.add(actualURL);
-		urlQueue.add(actualURL);
-		links.add(actualURL);
-	}
-	}
+  private List<String> extractLinks(Matcher matcher, List<String> disallowedPages) {
+    List<String> links = new ArrayList<>();
 
-	return links;
-}
+    while (matcher.find()) {
+      String actualURL = matcher.group();
+      if (!visitedURLs.contains(actualURL) && !disallowedPages.contains(actualURL)) {
+        visitedURLs.add(actualURL);
+        urlQueue.add(actualURL);
+        links.add(actualURL);
+      }
+    }
 
-private String getDomainName(String rootURL) {
-	return rootURL.replaceAll("http(s)?://|www\\.|/.*", "");
-}
+    return links;
+  }
+
+  private String getDomainName(String rootURL) {
+    return rootURL.replaceAll("http(s)?://|www\\.|/.*", "");
+  }
 
 }

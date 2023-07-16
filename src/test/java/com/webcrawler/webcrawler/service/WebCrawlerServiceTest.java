@@ -1,21 +1,21 @@
 package com.webcrawler.webcrawler.service;
 
-import com.webcrawler.webcrawler.service.ComplianceService;
-import com.webcrawler.webcrawler.service.ResourceReaderService;
-import com.webcrawler.webcrawler.service.WebCrawlerService;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.verifyNoMoreInteractions;
+import static org.mockito.Mockito.when;
+
 import com.webcrawler.webcrawler.web.UrlResponse;
+import java.util.ArrayList;
+import java.util.List;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
 
-import java.util.ArrayList;
-import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.mockito.Mockito.*;
-
-
-class WebCrawlerServiceTest {
+public class WebCrawlerServiceTest {
 
   public static final String ROOT_URL = "http://example.com";
   private WebCrawlerService webCrawlerService;
@@ -27,7 +27,7 @@ class WebCrawlerServiceTest {
   private ResourceReaderService resourceReader;
 
   @BeforeEach
-  void setUp() {
+  void setUp() throws ResourceReadException {
     complianceService = mock(ComplianceService.class);
     resourceReader = mock(ResourceReaderService.class);
     webCrawlerService = new WebCrawlerService(complianceService, resourceReader);
@@ -38,7 +38,7 @@ class WebCrawlerServiceTest {
   }
 
   @Test
-  void should_crawl_rootUrl() {
+  void should_crawl_rootUrl() throws ResourceReadException {
     int limit = 10;
     List<String> disallowedPages = new ArrayList<>();
     disallowedPages.add("http://example.com/disallowed");
@@ -62,7 +62,7 @@ class WebCrawlerServiceTest {
     verifyNoMoreInteractions(resourceReader);
   }
   @Test
-  void should_crawl_limited_number_of_pages() {
+  void should_crawl_limited_number_of_pages() throws ResourceReadException {
     int limit = 2;
 
     List<UrlResponse> result = webCrawlerService.crawl(ROOT_URL, limit);
@@ -76,7 +76,7 @@ class WebCrawlerServiceTest {
   }
 
   @Test
-  void should_not_crawl_disallowed_pages() {
+  void should_not_crawl_disallowed_pages() throws ResourceReadException {
     String rootURL = "http://example.com";
     int limit = 10;
     List<String> disallowedPages = new ArrayList<>();

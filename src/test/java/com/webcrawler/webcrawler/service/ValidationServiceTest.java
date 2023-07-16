@@ -2,7 +2,6 @@ package com.webcrawler.webcrawler.service;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import com.webcrawler.webcrawler.service.ValidationService;
 import java.util.List;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
