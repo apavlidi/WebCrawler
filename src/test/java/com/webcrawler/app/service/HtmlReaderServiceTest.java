@@ -6,7 +6,7 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 
 import com.webcrawler.app.exception.ResourceReadException;
-import com.webcrawler.app.factory.DefaultBufferedReaderFactory;
+import com.webcrawler.app.factory.URLBufferedReaderFactory;
 import java.io.BufferedReader;
 import java.io.IOException;
 import org.junit.jupiter.api.BeforeEach;
@@ -21,7 +21,7 @@ public class HtmlReaderServiceTest {
   public static final String URL = "https://example.com";
 
   @Mock
-  private DefaultBufferedReaderFactory bufferedReaderFactoryMock;
+  private URLBufferedReaderFactory bufferedReaderFactoryMock;
 
   @Mock
   private BufferedReader bufferedReaderMock;
@@ -29,7 +29,7 @@ public class HtmlReaderServiceTest {
   private HtmlReaderService htmlReaderService;
 
   @BeforeEach
-  void setUp()  {
+  void setUp() throws IOException {
     when(bufferedReaderFactoryMock.createBufferedReader(any()))
         .thenReturn(bufferedReaderMock);
     htmlReaderService = new HtmlReaderService(bufferedReaderFactoryMock);
