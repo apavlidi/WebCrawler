@@ -1,4 +1,4 @@
-package com.webcrawler.webcrawler.service;
+package com.webcrawler.app.service;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
@@ -9,7 +9,8 @@ import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
-import com.webcrawler.webcrawler.web.UrlResponse;
+import com.webcrawler.app.exception.ResourceReadException;
+import com.webcrawler.app.web.UrlResponse;
 import java.util.ArrayList;
 import java.util.List;
 import org.junit.jupiter.api.BeforeEach;

@@ -1,4 +1,6 @@
-package com.webcrawler.webcrawler.service;
+package com.webcrawler.app.service;
+
+import com.webcrawler.app.exception.ResourceReadException;
 
 public interface ResourceReaderService {
 

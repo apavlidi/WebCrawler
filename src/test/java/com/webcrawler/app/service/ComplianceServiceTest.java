@@ -1,7 +1,6 @@
-package com.webcrawler.webcrawler.service;
+package com.webcrawler.app.service;
 
-import com.webcrawler.webcrawler.service.ComplianceService;
-import com.webcrawler.webcrawler.service.ResourceReaderService;
+import com.webcrawler.app.exception.ResourceReadException;
 import java.util.Collections;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

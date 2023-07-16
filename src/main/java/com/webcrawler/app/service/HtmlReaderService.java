@@ -1,5 +1,7 @@
-package com.webcrawler.webcrawler.service;
+package com.webcrawler.app.service;
 
+import com.webcrawler.app.exception.ResourceReadException;
+import com.webcrawler.app.factory.DefaultBufferedReaderFactory;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.net.URL;

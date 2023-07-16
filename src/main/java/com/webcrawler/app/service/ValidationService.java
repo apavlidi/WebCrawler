@@ -1,4 +1,4 @@
-package com.webcrawler.webcrawler.service;
+package com.webcrawler.app.service;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -1,7 +1,8 @@
-package com.webcrawler.webcrawler.service;
+package com.webcrawler.app.service;
 
 import static java.util.Collections.emptyList;
 
+import com.webcrawler.app.exception.ResourceReadException;
 import java.util.ArrayList;
 import java.util.List;
 import org.springframework.stereotype.Service;

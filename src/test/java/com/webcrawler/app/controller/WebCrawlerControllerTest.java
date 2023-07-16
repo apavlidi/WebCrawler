@@ -1,9 +1,9 @@
-package com.webcrawler.webcrawler.controller;
+package com.webcrawler.app.controller;
 
-import com.webcrawler.webcrawler.web.WebCrawlerController;
-import com.webcrawler.webcrawler.service.ValidationService;
-import com.webcrawler.webcrawler.service.WebCrawlerService;
-import com.webcrawler.webcrawler.web.UrlResponse;
+import com.webcrawler.app.web.WebCrawlerController;
+import com.webcrawler.app.service.ValidationService;
+import com.webcrawler.app.service.WebCrawlerService;
+import com.webcrawler.app.web.UrlResponse;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;

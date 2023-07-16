@@ -1,6 +1,7 @@
-package com.webcrawler.webcrawler.service;
+package com.webcrawler.app.service;
 
-import com.webcrawler.webcrawler.web.UrlResponse;
+import com.webcrawler.app.exception.ResourceReadException;
+import com.webcrawler.app.web.UrlResponse;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;

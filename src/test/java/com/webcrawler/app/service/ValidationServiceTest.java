@@ -1,4 +1,4 @@
-package com.webcrawler.webcrawler.service;
+package com.webcrawler.app.service;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
 

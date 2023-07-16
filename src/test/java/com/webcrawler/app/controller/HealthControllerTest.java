@@ -1,9 +1,9 @@
-package com.webcrawler.webcrawler.controller;
+package com.webcrawler.app.controller;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 
-import com.webcrawler.webcrawler.web.HealthController;
+import com.webcrawler.app.web.HealthController;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.junit.jupiter.MockitoExtension;

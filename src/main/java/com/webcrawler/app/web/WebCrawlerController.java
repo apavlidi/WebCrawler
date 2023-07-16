@@ -1,7 +1,7 @@
-package com.webcrawler.webcrawler.web;
+package com.webcrawler.app.web;
 
-import com.webcrawler.webcrawler.service.ValidationService;
-import com.webcrawler.webcrawler.service.WebCrawlerService;
+import com.webcrawler.app.service.ValidationService;
+import com.webcrawler.app.service.WebCrawlerService;
 import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

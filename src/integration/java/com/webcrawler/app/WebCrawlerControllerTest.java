@@ -1,4 +1,4 @@
-package com.webcrawler.webcrawler;
+package com.webcrawler.app;
 
 import static org.hamcrest.Matchers.containsString;
 import static org.mockito.Mockito.when;
@@ -7,8 +7,8 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.webcrawler.webcrawler.service.WebCrawlerService;
-import com.webcrawler.webcrawler.web.UrlResponse;
+import com.webcrawler.app.service.WebCrawlerService;
+import com.webcrawler.app.web.UrlResponse;
 import java.util.ArrayList;
 import java.util.List;
 import org.junit.jupiter.api.Test;

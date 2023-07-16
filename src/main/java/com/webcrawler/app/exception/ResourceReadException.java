@@ -1,4 +1,4 @@
-package com.webcrawler.webcrawler.service;
+package com.webcrawler.app.exception;
 
 public class ResourceReadException extends Exception {
 

@@ -1,4 +1,4 @@
-package com.webcrawler.webcrawler.service;
+package com.webcrawler.app.factory;
 
 import java.io.BufferedReader;
 import java.io.IOException;

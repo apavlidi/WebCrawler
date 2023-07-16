@@ -1,4 +1,4 @@
-package com.webcrawler.webcrawler;
+package com.webcrawler.app;
 
 import static org.hamcrest.Matchers.containsString;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
