@@ -91,9 +91,7 @@
           </execution>
         </executions>
         <configuration>
-          <!-- optional: limit format enforcement to just the files changed by this feature branch -->
           <formats>
-            <!-- you can define as many formats as you want, each is independent -->
             <googleJavaFormat>
               <includes>
                 <include>src/main/java/**/*.java</include>
@@ -101,16 +99,10 @@
               </includes>
             </googleJavaFormat>
           </formats>
-          <!-- define a language-specific format -->
           <java>
-            <!-- no need to specify files, inferred automatically, but you can if you want -->
-
-            <!-- make sure every file has the following copyright header.
-              optionally, Spotless can set copyright years by digging
-              through git history (see "license" section below) -->
             <licenseHeader>
               <content>/* (C)$YEAR */
-              </content>  <!-- or <file>${project.basedir}/license-header</file> -->
+              </content>
             </licenseHeader>
           </java>
         </configuration>

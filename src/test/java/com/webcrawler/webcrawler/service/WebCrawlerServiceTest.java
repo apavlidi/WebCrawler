@@ -77,7 +77,6 @@ class WebCrawlerServiceTest {
 
   @Test
   void should_not_crawl_disallowed_pages() {
-    // Arrange
     String rootURL = "http://example.com";
     int limit = 10;
     List<String> disallowedPages = new ArrayList<>();
