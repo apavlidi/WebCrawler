@@ -9,6 +9,7 @@ import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
+import com.webcrawler.app.exception.CrawlException;
 import com.webcrawler.app.exception.ResourceReadException;
 import com.webcrawler.app.web.UrlResponse;
 import java.util.ArrayList;
@@ -109,6 +110,6 @@ public class WebCrawlerServiceTest {
     when(complianceService.retrieveDisallowedPages(ROOT_URL)).thenReturn(new ArrayList<>());
     when(resourceReader.readResource(anyString())).thenThrow(new ResourceReadException("An error occured",any()));
 
-    assertThrows(RuntimeException.class, () -> webCrawlerService.crawl(ROOT_URL, LIMIT));
+    assertThrows(CrawlException.class, () -> webCrawlerService.crawl(ROOT_URL, LIMIT));
   }
 }

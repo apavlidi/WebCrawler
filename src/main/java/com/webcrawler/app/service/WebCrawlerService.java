@@ -1,11 +1,14 @@
 package com.webcrawler.app.service;
 
+import com.webcrawler.app.exception.CrawlException;
 import com.webcrawler.app.exception.ResourceReadException;
 import com.webcrawler.app.web.UrlResponse;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Queue;
+import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import org.springframework.stereotype.Service;
@@ -14,7 +17,7 @@ import org.springframework.stereotype.Service;
 public class WebCrawlerService {
 
   private Queue<String> urlQueue;
-  private List<String> visitedURLs;
+  private Set<String> visitedURLs;
 
   private final ComplianceService complianceService;
   private final ResourceReaderService resourceReader;
@@ -43,7 +46,7 @@ public class WebCrawlerService {
       }
 
     } catch (ResourceReadException e) {
-      throw new RuntimeException("Failed parsing url");
+      throw new CrawlException(String.format("Failed crawling url:%s", rootURL), e);
     }
     return urlsResponse;
   }
@@ -56,7 +59,7 @@ public class WebCrawlerService {
 
   private void initializeCrawl(String rootURL) {
     urlQueue = new LinkedList<>();
-    visitedURLs = new ArrayList<>();
+    visitedURLs = new HashSet<>();
     urlQueue.add(rootURL);
     visitedURLs.add(rootURL);
   }
