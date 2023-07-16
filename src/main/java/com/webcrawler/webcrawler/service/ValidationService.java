@@ -1,5 +1,6 @@
 package com.webcrawler.webcrawler.service;
 
+import com.amazonaws.xray.spring.aop.XRayEnabled;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Matcher;
@@ -7,6 +8,7 @@ import java.util.regex.Pattern;
 import org.springframework.stereotype.Service;
 
 @Service
+@XRayEnabled
 public class ValidationService {
 
 

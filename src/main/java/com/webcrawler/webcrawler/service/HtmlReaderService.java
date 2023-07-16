@@ -1,5 +1,6 @@
 package com.webcrawler.webcrawler.service;
 
+import com.amazonaws.xray.spring.aop.XRayEnabled;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -7,6 +8,7 @@ import java.net.URL;
 import org.springframework.stereotype.Service;
 
 @Service
+@XRayEnabled
 public class HtmlReaderService implements ResourceReaderService {
 
   private final DefaultBufferedReaderFactory bufferedReaderFactory;
