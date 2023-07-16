@@ -18,9 +18,9 @@ public class HtmlReaderService implements ResourceReaderService {
   public String readResource(String url) throws ResourceReadException {
     StringBuilder rawHTML = new StringBuilder();
 
-    try (BufferedReader in = bufferedReaderFactory.createBufferedReader(url)) {
+    try (BufferedReader reader = bufferedReaderFactory.createBufferedReader(url)) {
       String inputLine;
-      while ((inputLine = in.readLine()) != null) {
+      while ((inputLine = reader.readLine()) != null) {
         rawHTML.append(inputLine);
       }
     } catch (IOException e) {

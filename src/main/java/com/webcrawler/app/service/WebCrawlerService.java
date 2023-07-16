@@ -11,6 +11,7 @@ import java.util.Queue;
 import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -22,6 +23,7 @@ public class WebCrawlerService {
   private final ComplianceService complianceService;
   private final ResourceReaderService resourceReader;
 
+  @Autowired
   public WebCrawlerService(ComplianceService complianceService,
       ResourceReaderService resourceReader) {
     this.complianceService = complianceService;
@@ -31,7 +33,7 @@ public class WebCrawlerService {
   public List<UrlResponse> crawl(String rootURL, int limit) {
     initializeCrawl(rootURL);
 
-    List<UrlResponse> urlsResponse = new ArrayList<>();
+    List<UrlResponse> urlResponses = new ArrayList<>();
     List<String> disallowedPages = complianceService.retrieveDisallowedPages(rootURL);
     Pattern pattern = retrieveDomainUrlPattern(rootURL);
     try {
@@ -41,14 +43,14 @@ public class WebCrawlerService {
         String rawHTML = resourceReader.readResource(currentUrl);
 
         List<String> links = extractLinks(pattern.matcher(rawHTML), disallowedPages);
-        urlsResponse.add(new UrlResponse(currentUrl, links));
+        urlResponses.add(new UrlResponse(currentUrl, links));
         limit--;
       }
 
     } catch (ResourceReadException e) {
       throw new CrawlException(String.format("Failed crawling url:%s", rootURL), e);
     }
-    return urlsResponse;
+    return urlResponses;
   }
 
   private Pattern retrieveDomainUrlPattern(String rootURL) {

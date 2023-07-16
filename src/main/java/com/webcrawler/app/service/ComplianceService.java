@@ -3,13 +3,15 @@ package com.webcrawler.app.service;
 import static java.util.Collections.emptyList;
 
 import com.webcrawler.app.exception.ResourceReadException;
-import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 import org.springframework.stereotype.Service;
 
 @Service
 public class ComplianceService {
 
+  public static final String ROBOTS_TXT = "/robots.txt";
   private final ResourceReaderService resourceReaderService;
 
   public ComplianceService(ResourceReaderService resourceReaderService) {
@@ -18,20 +20,20 @@ public class ComplianceService {
 
 
   public List<String> retrieveDisallowedPages(String domainName) {
-    List<String> disallowedPages = new ArrayList<>();
     try {
       String robotsContent = resourceReaderService.readResource(
-          removeTrailingSlashIfExists(domainName) + "/robots.txt");
+          removeTrailingSlashIfExists(domainName) + ROBOTS_TXT);
 
       String[] disallowedEntries = robotsContent.split("Disallow:");
 
-      for (int i = 1; i < disallowedEntries.length; i++) {
-        disallowedPages.add(disallowedEntries[i].trim());
-      }
+      return Arrays.stream(disallowedEntries)
+          .skip(1)
+          .map(String::trim)
+          .collect(Collectors.toList());
+
     } catch (ResourceReadException e) {
       return emptyList();
     }
-    return disallowedPages;
   }
 
 
