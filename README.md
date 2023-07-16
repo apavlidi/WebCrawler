@@ -1,4 +1,4 @@
-# Web-Crawler [![CircleCI](https://dl.circleci.com/status-badge/img/gh/apavlidi/WebCrawler/tree/main.svg?style=svg)](https://dl.circleci.com/status-badge/redirect/gh/apavlidi/WebCrawler/tree/main) [![codecov](https://codecov.io/gh/apavlidi/WebCrawler/branch/main/graph/badge.svg?token=T7ACUBVJDX)](https://codecov.io/gh/apavlidi/WebCrawler)
+# Web-Crawler [![CircleCI](https://dl.circleci.com/status-badge/img/gh/apavlidi/WebCrawler/tree/main.svg?style=svg)](https://dl.circleci.com/status-badge/redirect/gh/apavlidi/WebCrawler/tree/main) [![codecov](https://codecov.io/gh/apavlidi/WebCrawler/branch/main/graph/badge.svg?token=T7ACUBVJDX)](https://codecov.io/gh/apavlidi/WebCrawler) [![Known Vulnerabilities](https://snyk.io/test/github/apavlidi/WebCrawler/badge.svg)](https://snyk.io/test/github/apavlidi/WebCrawler)
 
 This is a java web crawler which crawls a URL and returns the URLs visited with all the links on that URL found. You can find here the released version of this application: [http://web-crawl-env.eba-upp2ihyt.eu-west-2.elasticbeanstalk.com/](http://web-crawl-env.eba-upp2ihyt.eu-west-2.elasticbeanstalk.com/)
 
