@@ -9,6 +9,8 @@ The project follows the [Google Java Style Guide](https://google.github.io/style
 
 For CI/CD it uses [CircleCI](https://app.circleci.com/), for deployment [AWS Elastic Beanstalk](https://aws.amazon.com/elasticloadbalancing/) and the application is wrapped with [Docker](https://www.docker.com/).
 
+It also integrated with [Snyk](https://snyk.io/) for security vulnerabilities.
+
 The CI/CD includes the following steps:
 1. Check codestyle
 2. Run tests
