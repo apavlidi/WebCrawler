@@ -5,7 +5,7 @@ This is a java web crawler which crawls a URL and returns the URLs visited with 
 ## Teck Stack
 
 The project is build with [Spring](https://spring.io/) and Java 17. It uses [JUnit](https://junit.org/junit5/).
-The project follows the [Google Java Style Guide](https://google.github.io/styleguide/javaguide.html) by utilising the [spotless plugin](https://github.com/diffplug/spotless) which is configured with [google style guide](https://google.github.io/styleguide/javaguide.html). It also provides a code coverage report by using [jacoco](https://github.com/jacoco/jacoco). 
+The project follows the [Google Java Style Guide](https://google.github.io/styleguide/javaguide.html) by utilising the [spotless plugin](https://github.com/diffplug/spotless). It also provides a code coverage report by using [jacoco](https://github.com/jacoco/jacoco). 
 
 For CI/CD it uses [CircleCI](https://app.circleci.com/), for deployment [AWS Elastic Beanstalk](https://aws.amazon.com/elasticloadbalancing/) and the application is wrapped with [Docker](https://www.docker.com/).
 
@@ -16,6 +16,8 @@ The CI/CD includes the following steps:
 2. Run tests
 3. Create Code Coverage report and publish it to Codecov
 4. Deploys application to ELB
+
+You can find the full list of tech in the [Tech & Tools Documentation](https://github.com/apavlidi/WebCrawler/wiki/Tech-&-Tools).
 
 ### Run it locally
 1) Clone the project on your local machine.  <br/>
