@@ -17,7 +17,7 @@ public class WebCrawlerController {
 private final WebCrawlerService crawlerService;
 private final ValidationService validationService;
 
-private final String DEFAULT_URL_LIMIT_CRAWL = "10";
+private final String DEFAULT_URL_LIMIT_CRAWL = "100";
 
   private static final Logger LOGGER = LoggerFactory.getLogger(WebCrawlerController.class);
 
