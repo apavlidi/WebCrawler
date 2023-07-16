@@ -1,6 +1,6 @@
 package com.webcrawler.webcrawler.controller;
 
-import com.webcrawler.webcrawler.WebCrawlerController;
+import com.webcrawler.webcrawler.web.WebCrawlerController;
 import com.webcrawler.webcrawler.service.ValidationService;
 import com.webcrawler.webcrawler.service.WebCrawlerService;
 import com.webcrawler.webcrawler.web.UrlResponse;

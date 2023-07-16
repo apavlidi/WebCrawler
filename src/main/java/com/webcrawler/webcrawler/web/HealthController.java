@@ -1,4 +1,4 @@
-package com.webcrawler.webcrawler;
+package com.webcrawler.webcrawler.web;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
